@@ -1,0 +1,5 @@
+/media/Data/Samba_Share_Device/Samba_Share/ServerResources/scripts/addUser.sh jair $(cat /home/jair/$PASSWDFILE)
+/media/Data/Samba_Share_Device/Samba_Share/ServerResources/scripts/addUser.sh david $(cat /home/david/$PASSWDFILE)
+/media/Data/Samba_Share_Device/Samba_Share/ServerResources/scripts/addUser.sh liat $(cat /home/liat/$PASSWDFILE)
+/media/Data/Samba_Share_Device/Samba_Share/ServerResources/scripts/addUser.sh susanne $(cat /home/susanne/$PASSWDFILE)
+/media/Data/Samba_Share_Device/Samba_Share/ServerResources/scripts/addUser.sh jehudah $(cat /home/jehudah/$PASSWDFILE)

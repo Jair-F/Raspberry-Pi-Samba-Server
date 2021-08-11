@@ -22,6 +22,12 @@ RESET_BOLD_BRIGHT="\e[21m"
 
 USER_INPUT="null"
 
+if [ $UID -ne 0 ]	# ensure we are running this as sudo/root
+then
+	echo "Execute this script as root/with sudo!"
+	exit
+fi
+
 # Start-Warning
 echo -e "$FOREGROUND_RED Clone this repository / copy the 'Samba_Share' folder to the place/Device, where the Data-Directory finally should be and$FOREGROUND_WHITE only then$FOREGROUND_RED execute this script!!"
 echo -e "$FOREGROUND_MAGENTA"

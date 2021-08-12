@@ -31,7 +31,7 @@ fi
 # Start-Warning
 echo -e "$FOREGROUND_RED Clone this repository / copy the 'Samba_Share' folder to the place/Device, where the Data-Directory finally should be and$FOREGROUND_WHITE only then$FOREGROUND_RED execute this script!!"
 echo -e "$FOREGROUND_MAGENTA"
-read -p "If you read the warning above and want to type 'CONTINUE': " USER_INPUT
+read -p "If you read the warning above and want to continue type 'CONTINUE': " USER_INPUT
 if [ $USER_INPUT != "CONTINUE" ]
 then
 	echo -e "$FOREGROUND_GREEN exiting $FOREGROUND_DEFAULT_COLOR"
@@ -79,7 +79,7 @@ then
 	sudo systemctl reload smbd
 	sudo systemctl reload nmbd
 else
-	echo "Skipping configure samba service!"
+	echo -e "$FOREGROUND_BLUE Skipping configure samba service!$FOREGROUND_DEFAULT_COLOR"
 fi
 
 
@@ -97,7 +97,7 @@ then
 	sudo cp../ssh/sshd_config /etc/ssh/sshd_config
 	sudo systemctl reload sshd
 else
-	echo "Skipping configure ssh service!"
+	echo -e "$FOREGROUND_BLUE Skipping configure ssh service!$FOREGROUND_DEFAULT_COLOR"
 fi
 
 
@@ -117,7 +117,7 @@ then
 	g++ ../Fancontrol/fancontrol.cpp -o ../Fancontrol/fancontrol.run -lwiringPi
 	systemctl enable fancontrol.service
 else
-	echo "Skipping install fancontroll service!"
+	echo -e "$FOREGROUND_BLUE Skipping install fancontroll service!$FOREGROUND_DEFAULT_COLOR"
 fi
 
 
@@ -134,7 +134,7 @@ if [ $USER_INPUT == "y" ] || [ $USER_INPUT == "Y" ] || [ -z $USER_INPUT ]
 then
 	sudo cp ../sudo/sudoers /etc/sudoers
 else
-	echo "Skipp configure sudo service!"
+	echo -e "$FOREGROUND_BLUE Skipp configure sudo service!$FOREGROUND_DEFAULT_COLOR"
 fi
 
 
@@ -154,7 +154,7 @@ then
 	sudo cp ../unattended-upgrades/* /etc/apt/apt.conf.d/
 	sudo systemctl reload unattended-upgrades.service
 else
-	echo "Skipping install automaitc update/upgrade service!"
+	echo -e "$FOREGROUND_BLUE Skipping install automaitc update/upgrade service!$FOREGROUND_DEFAULT_COLOR"
 fi
 
 
@@ -179,7 +179,7 @@ then
 	sudo echo "# Samba-Share Device" >> /etc/fstab
 	sudo echo "UUID=$USER_INPUT       /media/Data/Samba_Share_Device  ext4    defaults,noatime        0       2" >> /etc/fstab
 else
-	echo "Skipping Samba-Share-Device/Disk configuration"
+	echo -e "$FOREGROUND_BLUE Skipping Samba-Share-Device/Disk configuration$FOREGROUND_DEFAULT_COLOR"
 fi
 
 

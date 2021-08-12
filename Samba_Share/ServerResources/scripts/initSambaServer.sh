@@ -56,7 +56,7 @@ sudo apt upgrade -y
 echo
 echo -e "$FOREGROUND_CYAN Installing necessarily packages $FOREGROUND_DEFAULT_COLOR"
 echo
-sudo apt install openssh-server build-essential samba  -y
+sudo apt install openssh-server build-essential samba
 
 sudo systemctl enable smbd
 sudo systemctl enalbe nmbd

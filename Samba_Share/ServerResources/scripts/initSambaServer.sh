@@ -183,7 +183,8 @@ else
 fi
 
 
-
+# Adding group for the users, which every samba user will be part of
+sudo groupadd sambausers
 
 
 echo

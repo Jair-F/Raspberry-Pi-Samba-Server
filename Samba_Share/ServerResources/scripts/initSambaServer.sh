@@ -184,6 +184,7 @@ fi
 
 
 # Adding group for the users, which every samba user will be part of
+echo -e "$FOREGROUND_CYAN Adding \"sambausers\" group $FOREGROUND_DEFAULT_COLOR"
 sudo groupadd sambausers
 
 

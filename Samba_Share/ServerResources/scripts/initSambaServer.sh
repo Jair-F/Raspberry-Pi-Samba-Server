@@ -53,37 +53,55 @@ sudo apt upgrade -y
 
 
 # Install necessarily pacakges
-echo
-echo -e "$FOREGROUND_CYAN Installing necessarily packages $FOREGROUND_DEFAULT_COLOR"
-echo
-sudo apt install openssh-server build-essential samba
-
-sudo systemctl enable smbd
-sudo systemctl enalbe nmbd
-
-sudo systemctl enable sshd
+#echo
+#echo -e "$FOREGROUND_CYAN Installing necessarily packages $FOREGROUND_DEFAULT_COLOR"
+#echo
+#sudo apt install openssh-server build-essential samba
+#
+#sudo systemctl enable smbd
+#sudo systemctl enalbe nmbd
+#
+#sudo systemctl enable sshd
 
 
 
 
 # Configuring samba service
+#echo
+#echo -e "$FOREGROUND_CYAN  configuring the Samba service $FOREGROUND_DEFAULT_COLOR"
+#echo
+#
+#read -p "Configure samba service with preconfigured config-file y/n: " USER_INPUT
+## True if input is 'y' or 'Y' or ''(empty input!)
+#if [ $USER_INPUT == "y" ] || [ $USER_INPUT == "Y" ] || [ -z $USER_INPUT ]
+#then
+#	sudo cp ../Samba/smb.conf /etc/samba/smb.conf
+#	sudo systemctl reload smbd
+#	sudo systemctl reload nmbd
+#else
+#	echo -e "$FOREGROUND_BLUE Skipping configure samba service!$FOREGROUND_DEFAULT_COLOR"
+#fi
+
+
+
+
+# Configuring Samba-Remote password change util
 echo
-echo -e "$FOREGROUND_CYAN  configuring the Samba service $FOREGROUND_DEFAULT_COLOR"
+echo -e "$FOREGROUND_CYAN  configuring the Samba-Remote-PasswordChange service $FOREGROUND_DEFAULT_COLOR"
 echo
 
-read -p "Configure samba service with preconfigured config-file y/n: " USER_INPUT
+read -p "Configure Samba-Remote-PasswordChange tool y/n: " USER_INPUT
 # True if input is 'y' or 'Y' or ''(empty input!)
 if [ $USER_INPUT == "y" ] || [ $USER_INPUT == "Y" ] || [ -z $USER_INPUT ]
 then
-	sudo cp ../Samba/smb.conf /etc/samba/smb.conf
-	sudo systemctl reload smbd
-	sudo systemctl reload nmbd
+	git clone https://github.com/Jair-F/Samba-Remote.git ./..
+	sudo "../Samba-Remote/install_server.sh"
 else
-	echo -e "$FOREGROUND_BLUE Skipping configure samba service!$FOREGROUND_DEFAULT_COLOR"
+	echo -e "$FOREGROUND_BLUE Skipping configure Samba-Remote-PasswordChange service!$FOREGROUND_DEFAULT_COLOR"
 fi
 
 
-
+exit
 
 # SSH-Service
 echo

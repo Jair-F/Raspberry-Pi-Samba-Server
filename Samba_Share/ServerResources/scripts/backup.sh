@@ -15,7 +15,6 @@ EXIT_CODE=1     # a temp variable used to get the result of commands
 TIME_DATE=`date "+%A_%d.%m.%Y_%H:%M:%S"`
 BACKUP_NAME="$HOSTNAME $TIME_DATE"  # depends on the date,time. outputs something like: "Saturday_26.03.2022_20:26:54"
 echo $BACKUP_NAME
-exit
 
 # check if a backup-repository exists - if not create one
 borg check --repository-only $BACKUP_FOLDER_PATH

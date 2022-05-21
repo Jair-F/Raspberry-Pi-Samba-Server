@@ -1,0 +1,5 @@
+#!/bin/bash
+
+SCRIPT_DIR="/media/Data/Samba_Share_Device/Samba_Share/ServerResources/scripts"
+
+`$SCRIPT_DIR/backup.sh`

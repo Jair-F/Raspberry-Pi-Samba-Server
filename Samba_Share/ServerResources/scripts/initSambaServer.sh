@@ -183,7 +183,7 @@ echo
 echo -e "$FOREGROUND_CYAN Configuring automount at start of Samba-Share Device/Disk $FOREGROUND_DEFAULT_COLOR"
 echo
 
-read -p "Do you want to Configure automount of the Samba-Share-Data-Disk at system-start(only relevent if you have a externl drive where you want to store this data on) y/n: " USER_INPUT
+read -p "Do you want to Configure automount of the Samba-Share-Data-Disk at system-start(only relevant if you have a external drive where you want to store this data on) y/n: " USER_INPUT
 if [ $USER_INPUT == "y" ] || [ $USER_INPUT == "Y" ] || [ -z $USER_INPUT ]
 then
 	echo -e "$FOREGROUND_MAGENTA Connect the Disk to the Server and then continue(press ENTER) $FOREGROUND_DEFAULT_COLOR"
@@ -204,6 +204,34 @@ fi
 # Adding group for the users, which every samba user will be part of
 echo -e "$FOREGROUND_CYAN Adding \"sambausers\" group $FOREGROUND_DEFAULT_COLOR"
 sudo groupadd sambausers
+
+
+# Backups
+echo
+echo -e "$FOREGROUND_CYAN Configuring Backup $FOREGROUND_DEFAULT_COLOR"
+echo
+
+read -p "Do you want to Configure Backups( y/n: " USER_INPUT
+if [ $USER_INPUT == "y" ] || [ $USER_INPUT == "Y" ] || [ -z $USER_INPUT ]
+then
+	echo -e "$FOREGROUND_MAGENTA Connect the Disk to the Server and then continue(press ENTER) $FOREGROUND_DEFAULT_COLOR"
+	read
+
+	echo -e "$FOREGROUND_RED!!!! WARNING !!!!"
+	echo -e "The Disk UUID is not checked for validness or availability of the associated disk so check that by yourself!$FOREGROUND_DEFAULT_COLOR"
+	read -p "Samba-Share-Data-Disk UUID: " USER_INPUT
+	
+	sudo echo >> /etc/fstab
+	sudo echo "# Backup-Drive" >> /etc/fstab
+	sudo echo "UUID=$USER_INPUT       /media/Data/Samba_Share_Device/Backups  ext4    defaults,noatime        0       2" >> /etc/fstab
+
+	# add cronjob for backup-script
+	sudo cp ./install_data/borg_backup /etc/cron.daily
+	sudo chmown root:root /etc/cron.daily/borg_backup
+	sudo chmod +x /etc/cron.daily/borg_backup
+else
+	echo -e "$FOREGROUND_BLUE Skipping Backup configuration$FOREGROUND_DEFAULT_COLOR"
+fi
 
 
 echo

@@ -101,7 +101,6 @@ else
 fi
 
 
-exit
 
 # SSH-Service
 echo
@@ -227,7 +226,7 @@ then
 
 	# add cronjob for backup-script
 	sudo cp ./install_data/borg_backup /etc/cron.daily
-	sudo chmown root:root /etc/cron.daily/borg_backup
+	sudo chown root:root /etc/cron.daily/borg_backup
 	sudo chmod +x /etc/cron.daily/borg_backup
 else
 	echo -e "$FOREGROUND_BLUE Skipping Backup configuration$FOREGROUND_DEFAULT_COLOR"

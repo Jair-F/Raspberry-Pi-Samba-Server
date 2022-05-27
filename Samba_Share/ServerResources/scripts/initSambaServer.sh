@@ -194,7 +194,7 @@ then
 	
 	sudo echo >> /etc/fstab
 	sudo echo "# Samba-Share Device" >> /etc/fstab
-	sudo echo "UUID=$USER_INPUT       /media/Data/Samba_Share_Device  ext4    defaults,noatime        0       2" >> /etc/fstab
+	sudo echo "UUID=$USER_INPUT       $SAMBA_SERVER_DIR  ext4    defaults,noatime        0       2" >> /etc/fstab
 else
 	echo -e "$FOREGROUND_BLUE Skipping Samba-Share-Device/Disk configuration$FOREGROUND_DEFAULT_COLOR"
 fi
@@ -222,7 +222,7 @@ then
 	
 	sudo echo >> /etc/fstab
 	sudo echo "# Backup-Drive" >> /etc/fstab
-	sudo echo "UUID=$USER_INPUT       /media/Data/Samba_Share_Device/Backups  ext4    defaults,noatime        0       2" >> /etc/fstab
+	sudo echo "UUID=$USER_INPUT       $SAMBA_SERVER_DIR/Backups  ext4    defaults,noatime        0       2" >> /etc/fstab
 
 	# add cronjob for backup-script
 	sudo cp ./install_data/borg_backup /etc/cron.daily

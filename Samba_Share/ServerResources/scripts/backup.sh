@@ -3,9 +3,9 @@
 # documentation of borg: https://borgbackup.readthedocs.io/en/stable/
 
 # const vars
-BACKUP_FOLDER_PATH='../../Backups'
+BACKUP_FOLDER_PATH='/media/Data/Samba_Share_Device/Samba_Share/Backups'
 COMPRESSION_TYPE='lz4'
-DATA_TO_BACKUP='../../Homes ../../PublicShares'
+DATA_TO_BACKUP='/media/Data/Samba_Share_Device/Samba_Share/Homes /media/Data/Samba_Share_Device/Samba_Share/PublicShares'
 BACKUPS_KEEP_DAILY=1
 BACKUPS_KEEP_WEEKLY=1
 BACKUPS_KEEP_MONTHLY=4
@@ -30,7 +30,7 @@ else
 fi
 
 # creating backup
-borg create -v --progress --compression "$COMPRESSION_TYPE" "$BACKUP_FOLDER_PATH::\"$BACKUP_NAME\"" "$DATA_TO_BACKUP"
+borg create -v --progress --compression "$COMPRESSION_TYPE" "$BACKUP_FOLDER_PATH::\"$BACKUP_NAME\"" $DATA_TO_BACKUP
 EXIT_CODE=$?
 if [ $EXIT_CODE -ne 0 ];
 then

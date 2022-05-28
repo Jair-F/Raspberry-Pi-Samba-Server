@@ -24,13 +24,13 @@ EXIT_CODE=$?
 if [ $EXIT_CODE -ne 0 ];
 then
     echo "IN $BACKUP_FOLDER_PATH does not exist a borg-repository - creating..."
-    borg init -e=none $BACKUP_FOLDER_PATH
+    #borg init -e=none $BACKUP_FOLDER_PATH
 else
     echo "A borg-repository already exists..."
 fi
 
 # creating backup
-borg create -v --progress --compression "$COMPRESSION_TYPE" "$BACKUP_FOLDER_PATH::\"$BACKUP_NAME\"" $DATA_TO_BACKUP
+borg create -v --progress --compression "$COMPRESSION_TYPE" "$BACKUP_FOLDER_PATH::$BACKUP_NAME" $DATA_TO_BACKUP
 EXIT_CODE=$?
 if [ $EXIT_CODE -ne 0 ];
 then

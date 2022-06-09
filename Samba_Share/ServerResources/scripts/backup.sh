@@ -7,7 +7,7 @@ BACKUP_FOLDER_PATH='/media/Data/Samba_Share_Device/Samba_Share/Backups'
 COMPRESSION_TYPE='lz4'
 DATA_TO_BACKUP='/media/Data/Samba_Share_Device/Samba_Share/Homes /media/Data/Samba_Share_Device/Samba_Share/PublicShares'
 BACKUPS_KEEP_DAILY=1
-BACKUPS_KEEP_WEEKLY=1
+BACKUPS_KEEP_WEEKLY=7
 BACKUPS_KEEP_MONTHLY=4
 BACKUPS_KEEP_YEARLY=12
 

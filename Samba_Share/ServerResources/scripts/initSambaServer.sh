@@ -213,6 +213,7 @@ echo
 read -p "Do you want to Configure Backups( y/n: " USER_INPUT
 if [ $USER_INPUT == "y" ] || [ $USER_INPUT == "Y" ] || [ -z $USER_INPUT ]
 then
+	sudo apt install -y borgbackup
 	echo -e "$FOREGROUND_MAGENTA Connect the Disk to the Server and then continue(press ENTER) $FOREGROUND_DEFAULT_COLOR"
 	read
 

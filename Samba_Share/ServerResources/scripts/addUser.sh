@@ -1,7 +1,7 @@
 #/bin/bash
 
 USER=$1
-read -p "User-Password: " PASSWORD
+read -p "User-Password for $USER: " PASSWORD
 useradd $USER
 
 # real home folder on the system

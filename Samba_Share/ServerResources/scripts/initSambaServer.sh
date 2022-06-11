@@ -226,7 +226,7 @@ then
 	sudo echo "UUID=$USER_INPUT       $SAMBA_SERVER_DIR/Samba_Share/Backups  ext4    defaults,noatime        0       2" >> /etc/fstab
 
 	# add cronjob for backup-script
-	sudo cp ./install_data/borg_backup /etc/cron.daily
+	sudo cp $SAMBA_SERVER_DIR/Samba_Share/ServerResources/scripts/install_data/borg_backup /etc/cron.daily
 	sudo chown root:root /etc/cron.daily/borg_backup
 	sudo chmod +x /etc/cron.daily/borg_backup
 else

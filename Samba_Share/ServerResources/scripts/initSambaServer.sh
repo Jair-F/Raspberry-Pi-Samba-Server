@@ -2,7 +2,7 @@
 
 # Bash operations: https://devhints.io/bash
 
-SAMBA_SERVER_DIR=`cd ../.. && pwd`
+SERVER_DIR=`cd ../.. && pwd`
 
 # Terminal text output formatting: https://misc.flogisoft.com/bash/tip_colors_and_formatting
 # !!! ---------------------- use 'echo -e' for formatted text output ---------------------- !!!
@@ -194,7 +194,7 @@ then
 	
 	sudo echo >> /etc/fstab
 	sudo echo "# Samba-Share Device" >> /etc/fstab
-	sudo echo "UUID=$USER_INPUT       $SAMBA_SERVER_DIR  ext4    defaults,noatime        0       2" >> /etc/fstab
+	sudo echo "UUID=$USER_INPUT       $SERVER_DIR  ext4    defaults,noatime        0       2" >> /etc/fstab
 else
 	echo -e "$FOREGROUND_BLUE Skipping Samba-Share-Device/Disk configuration$FOREGROUND_DEFAULT_COLOR"
 fi
@@ -223,10 +223,10 @@ then
 	
 	sudo echo >> /etc/fstab
 	sudo echo "# Backup-Drive" >> /etc/fstab
-	sudo echo "UUID=$USER_INPUT       $SAMBA_SERVER_DIR/Samba_Share/Backups  ext4    defaults,noatime        0       2" >> /etc/fstab
+	sudo echo "UUID=$USER_INPUT       $SERVER_DIR/Samba_Share/Backups  ext4    defaults,noatime        0       2" >> /etc/fstab
 
 	# add cronjob for backup-script
-	sudo cp $SAMBA_SERVER_DIR/Samba_Share/ServerResources/scripts/install_data/borg_backup /etc/cron.daily
+	sudo cp $SERVER_DIR/Samba_Share/ServerResources/scripts/install_data/borg_backup /etc/cron.daily
 	sudo chown root:root /etc/cron.daily/borg_backup
 	sudo chmod +x /etc/cron.daily/borg_backup
 else

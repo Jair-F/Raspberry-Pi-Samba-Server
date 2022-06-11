@@ -6,7 +6,7 @@ useradd $USER
 
 # real home folder on the system
 mkdir /home/$USER
-cp /etc/skel/.* /home/$USER
+cp /etc/skel/.* /home/$USER 2> /dev/null
 chown -R $USER:$USER /home/$USER
 chmod -R 770 /home/$USER
 

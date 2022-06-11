@@ -210,7 +210,7 @@ echo
 echo -e "$FOREGROUND_CYAN Configuring Backup $FOREGROUND_DEFAULT_COLOR"
 echo
 
-read -p "Do you want to Configure Backups( y/n: " USER_INPUT
+read -p "Do you want to Configure Backups( y/n ): " USER_INPUT
 if [ $USER_INPUT == "y" ] || [ $USER_INPUT == "Y" ] || [ -z $USER_INPUT ]
 then
 	sudo apt install -y borgbackup

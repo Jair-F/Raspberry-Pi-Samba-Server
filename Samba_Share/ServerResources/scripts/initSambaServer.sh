@@ -223,7 +223,7 @@ then
 	
 	sudo echo >> /etc/fstab
 	sudo echo "# Backup-Drive" >> /etc/fstab
-	sudo echo "UUID=$USER_INPUT       $SERVER_DIR/Samba_Share/Backups  ext4    defaults,noatime        0       2" >> /etc/fstab
+	sudo echo "UUID=$USER_INPUT       $SERVER_DIR/Backups  ext4    defaults,noatime        0       2" >> /etc/fstab
 
 	# add cronjob for backup-script
 	sudo cp $SERVER_DIR/Samba_Share/ServerResources/scripts/install_data/borg_backup /etc/cron.daily

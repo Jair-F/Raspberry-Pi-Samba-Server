@@ -9,7 +9,9 @@ For doing backups I recommend borg backup: `sudo apt install -y borgbackup`
 #### build the continer
 `docker build -t jairf/samba_server:0.1 .`
 #### run the container
-`docker run -itd --rm --restart unless-stopped --name samba_server jairf/samba_server:0.1 -p 139:139 -p 445:445 -p 22:22`
+`docker run -itd --rm --restart unless-stopped --name samba_server jairf/samba_server:0.1 -p 139:139 -p 445:445 -p 22:22 -v <path_to_ssd>:/media/Data/Samba_Share_Device`
+
+the folder we mount to the container should have the structure like the **./Samba_Share** folder.
 
 ## Backup
 To configure when the backup-script will be executed you have to change the crontab file - the daily-section

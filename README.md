@@ -7,7 +7,17 @@ For doing backups I recommend borg backup: `sudo apt install -y borgbackup`
 
 ## starting up the server
 #### build the continer
-`docker build -t jairf/samba_server:0.1 .`
+Build for the current architecture: `docker build -t jairf/samba_server:0.1 .`
+
+<details>
+<summary>Build for arm64 and amd64:</summary>
+
+- create a custom builder:  `docker buildx create --name multi-arch-builder --driver docker-container --bootstrap --use`
+- Build the container: `docker buildx build --push --platform linux/amd64,linux/arm64 --network=host -t jairf/samba_server:0.1 -t jairf/samba_server:latest .`
+
+</details>
+
+
 #### run the container
 `docker run -itd --rm --restart unless-stopped --name samba_server jairf/samba_server:0.1 -p 139:139 -p 445:445 -p 22:22 -v <path_to_ssd>:/media/Data/Samba_Share_Device`
 

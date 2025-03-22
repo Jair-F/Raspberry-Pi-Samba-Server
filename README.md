@@ -13,6 +13,8 @@ For doing backups I recommend borg backup: `sudo apt install -y borgbackup`
 
 the folder we mount to the container should have the structure like the **./Samba_Share** folder.
 
+[Docker Hub link](https://hub.docker.com/repository/docker/jairf/samba_server/general)
+
 ## Backup
 To configure when the backup-script will be executed you have to change the crontab file - the daily-section
 

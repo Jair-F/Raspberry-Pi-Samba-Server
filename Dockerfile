@@ -1,26 +1,25 @@
 FROM ubuntu:22.04
 
 RUN apt update && apt upgrade -y
-RUN apt install vim openssh-server build-essential samba sudo net-tools -y
-ADD  ./smb.conf /etc/samba/smb.conf
 
-# creates user with default password
-RUN useradd -m -G sudo user
-# delete password for user
-# RUN passwd -d user
+# dev container settings
+RUN apt install -y git bash-completion fish curl wget
 
-# updating the password: `openssl passwd -6`
-# https://stackoverflow.com/questions/66190675/docker-set-user-password-non-interactively
-# password is `pass`
-RUN usermod -p '$6$rvUVdxrCv5S/Zknq$RQLd9FA.H/iq4gMVUIQANgPp93jOO9itv7gAecODzL/C9c5xodhhYMsITpfTCZvAlFraK94TAwmAyAXYwKjmh/' user
-
+RUN apt install -y vim openssh-server build-essential samba sudo net-tools iproute2
+COPY ./smb.conf /etc/samba/smb.conf
 RUN mkdir -p /media/Data/Samba_Share_Device
 
-#USER user
-#WORKDIR /home/user
+COPY ./data/ /tmp/data/
+RUN /bin/bash /tmp/data/addUsers.sh
+RUN rm -rd /tmp/data
+
+
+USER root
+RUN cp -R /etc/skel/.* /root/ ; echo " "
+RUN usermod -s /bin/fish root
 WORKDIR /root
 
-ADD startServer.sh ./
+COPY startServer.sh ./
 RUN sudo chmod +x ./startServer.sh
 
 ENTRYPOINT [ "/bin/bash", "startServer.sh" ]

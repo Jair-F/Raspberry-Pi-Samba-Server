@@ -1,7 +1,12 @@
 FROM ubuntu:22.04
 
 RUN apt update && apt upgrade -y
-RUN apt install vim openssh-server build-essential samba sudo net-tools -y
+
+# dev container settings
+RUN apt install -y git bash-completion
+RUN git config --global core.autocrlf true
+
+RUN apt install -y vim openssh-server build-essential samba sudo net-tools
 ADD  ./smb.conf /etc/samba/smb.conf
 
 # creates user with default password

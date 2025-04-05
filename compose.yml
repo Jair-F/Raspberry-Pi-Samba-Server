@@ -1,0 +1,11 @@
+services:
+  samba_server:
+    build: .
+    network_mode: "host"
+    ports:
+      - "139:139"
+      - "445:445"
+      - "22:22"
+    volumes:
+      - data/sambaUsers.back:/server_scripts/sambaUsers.back
+      - /media/Data/Samba_Share_Device:/media/Data/Samba_Share_Device

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+SCRIPT=$(realpath "$0")
+SCRIPT_PATH=$(dirname "$SCRIPT")
+echo $SCRIPT_PATH
+
 # delete password for user
 # passwd -d user
 # updating the password: `openssl passwd -6`
@@ -17,7 +21,7 @@ echo "adding login user jair"
 useradd -m -p '$6$rvUVdxrCv5S/Zknq$RQLd9FA.H/iq4gMVUIQANgPp93jOO9itv7gAecODzL/C9c5xodhhYMsITpfTCZvAlFraK94TAwmAyAXYwKjmh/' \
  	-s /bin/bash -U -G sudo jair
 
-for username in $(cat /tmp/data/sambaUser.back | awk -F: '{print $1}')
+for username in $(cat "$SCRIPT_PATH/sambaUsers.back" | awk -F: '{print $1}')
 do
 	if [ $username == "jair" ] ; # we add him extra later
 	then
@@ -30,7 +34,7 @@ do
 done
 
 # restoring samba users
-pdbedit -i smbpasswd:./tmp/data/sambaUser.back
+pdbedit -i "smbpasswd:$SCRIPT_PATH/sambaUser.back"
 
 echo ""
 echo "list of samba users:"

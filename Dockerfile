@@ -8,18 +8,17 @@ RUN apt install -y git bash-completion fish curl wget
 RUN apt install -y vim openssh-server build-essential samba sudo net-tools iproute2
 COPY ./smb.conf /etc/samba/smb.conf
 RUN mkdir -p /media/Data/Samba_Share_Device
-
-COPY ./data/ /tmp/data/
-RUN /bin/bash /tmp/data/addUsers.sh
-RUN rm -rd /tmp/data
+RUN mkdir /server_scripts
 
 
 USER root
 RUN cp -R /etc/skel/.* /root/ ; echo " "
 RUN usermod -s /bin/fish root
-WORKDIR /root
 
-COPY startServer.sh ./
-RUN sudo chmod +x ./startServer.sh
+WORKDIR /server_scripts
 
-ENTRYPOINT [ "/bin/bash", "startServer.sh" ]
+COPY scripts/startServer.sh /server_scripts
+COPY scripts/addUsers.sh /server_scripts
+RUN sudo chmod +x /server_scripts/startServer.sh
+
+ENTRYPOINT [ "/bin/bash", "/server_scripts/startServer.sh" ]

@@ -1,6 +1,7 @@
 services:
   samba_server:
     build: .
+    restart: unless-stopped
     network_mode: "host"
     ports:
       - "139:139"

@@ -19,6 +19,6 @@ WORKDIR /server_scripts
 
 COPY scripts/startServer.sh /server_scripts
 COPY scripts/addUsers.sh /server_scripts
-RUN sudo chmod +x /server_scripts/startServer.sh
+RUN chmod +x /server_scripts/startServer.sh /server_scripts/addUsers.sh
 
 ENTRYPOINT [ "/bin/bash", "/server_scripts/startServer.sh" ]

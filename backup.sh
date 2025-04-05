@@ -3,7 +3,7 @@
 # documentation of borg: https://borgbackup.readthedocs.io/en/stable/
 
 # const vars
-BACKUP_FOLDER_PATH='/media/Data/Samba_Share_Device/Samba_Share/Backups'
+BACKUP_FOLDER_PATH='/media/Data/Samba_Share_Device/Backups'
 COMPRESSION_TYPE='lz4'
 DATA_TO_BACKUP='/media/Data/Samba_Share_Device/Samba_Share/Homes /media/Data/Samba_Share_Device/Samba_Share/PublicShares'
 BACKUPS_KEEP_DAILY=1

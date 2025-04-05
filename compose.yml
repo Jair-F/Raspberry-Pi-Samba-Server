@@ -1,12 +1,14 @@
 services:
   samba_server:
-    build: .
+    # build: .
+    image: jairf/samba_server:0.2
+    tty: true # make container run in background
     restart: unless-stopped
-    network_mode: "host"
+    # network_mode: "host"
     ports:
       - "139:139"
       - "445:445"
       - "22:22"
     volumes:
-      - ./data/sambaUsers.back:/server_scripts/sambaUsers.back
+      - ${PWD}/data/sambaUsers.back:/server_scripts/sambaUsers.back
       - /media/Data/Samba_Share_Device:/media/Data/Samba_Share_Device

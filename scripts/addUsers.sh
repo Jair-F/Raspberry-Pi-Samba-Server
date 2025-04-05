@@ -17,6 +17,12 @@ then
 	exit 1
 fi
 
+if [ ! -f $SCRIPT_PATH/sambaUsers.back ]
+then
+	echo "samba users Backup File doesnt exists - not creating users"
+	exit 0
+fi
+
 echo "adding login user jair"
 useradd -m -p '$6$rvUVdxrCv5S/Zknq$RQLd9FA.H/iq4gMVUIQANgPp93jOO9itv7gAecODzL/C9c5xodhhYMsITpfTCZvAlFraK94TAwmAyAXYwKjmh/' \
  	-s /bin/bash -U -G sudo jair
@@ -34,7 +40,7 @@ do
 done
 
 # restoring samba users
-pdbedit -i "smbpasswd:$SCRIPT_PATH/sambaUser.back"
+pdbedit -i "smbpasswd:$SCRIPT_PATH/sambaUsers.back"
 
 echo ""
 echo "list of samba users:"

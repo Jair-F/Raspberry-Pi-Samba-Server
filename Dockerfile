@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 RUN apt update && apt upgrade -y
 
 # dev container settings
-RUN apt install -y git bash-completion fish curl wget
+RUN apt install -y git bash-completion fish curl wget shellcheck
 
 RUN apt install -y vim openssh-server build-essential samba sudo net-tools iproute2
 COPY ./smb.conf /etc/samba/smb.conf

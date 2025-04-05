@@ -3,7 +3,7 @@ name: Shell Linting
 on: push
 
 jobs:
-  build-push-container:
+  lint-shell-code:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4

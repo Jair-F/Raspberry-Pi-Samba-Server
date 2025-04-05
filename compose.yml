@@ -7,5 +7,5 @@ services:
       - "445:445"
       - "22:22"
     volumes:
-      - data/sambaUsers.back:/server_scripts/sambaUsers.back
+      - ./data/sambaUsers.back:/server_scripts/sambaUsers.back
       - /media/Data/Samba_Share_Device:/media/Data/Samba_Share_Device

@@ -7,8 +7,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+      - name: Update system
+        run: sudo apt update && sudo apt upgrade -y
       - name: Install shellcheck
-        run: apt update && apt install -y shellcheck
+        run: sudo apt install -y shellcheck
       - name: Shell Linting
         run: shellcheck scripts/*.sh .devcontainer/*.sh
 

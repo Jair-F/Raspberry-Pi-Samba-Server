@@ -27,8 +27,8 @@ echo "adding login user jair"
 useradd -m -p "\$6\$rvUVdxrCv5S/Zknq\$RQLd9FA.H/iq4gMVUIQANgPp93jOO9itv7gAecODzL/C9c5xodhhYMsITpfTCZvAlFraK94TAwmAyAXYwKjmh/" \
  	-s /bin/bash -U -G sudo jair
 
-#for username in $(awk -F: '{print $1}' < "$SCRIPT_PATH/sambaUsers.back")
-while read -r username < "$(awk -F: '{print $1}' < "$SCRIPT_PATH/sambaUsers.back")"
+for username in $(awk -F: '{print $1}' < "$SCRIPT_PATH/sambaUsers.back")
+#while read -r username < "$(awk -F: '{print $1}' < "$SCRIPT_PATH/sambaUsers.back")"
 do
 	if [ "$username" == "jair" ] ; # we add him extra later
 	then

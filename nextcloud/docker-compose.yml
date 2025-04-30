@@ -1,0 +1,17 @@
+services:
+  nextcloud:
+    image: nextcloud
+    restart: unless-stopped
+    # network_mode: "host"
+    ports:
+      - 80:80
+      - 8080:8080
+      - 8443:8443
+      - 443:443
+      - 3478:3478
+    #volumes:
+    #  - /media/server/nextcloud:/var/www/html
+    environment:
+      - SQLITE_DATABASE=nextcloud
+      - NEXTCLOUD_ADMIN_USER=admin
+      - NEXTCLOUD_ADMIN_PASSWORD=admin

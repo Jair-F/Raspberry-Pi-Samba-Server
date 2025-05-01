@@ -14,7 +14,8 @@
 
 - resources:
     label: Disk
-    disk: /media/
+    disk: /app/config
+    #disk: /media/server
 
 - datetime:
     text_size: xl

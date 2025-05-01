@@ -2,4 +2,4 @@
 
 clear
 cp -r hompage/* /media/server/hompage/
-docker compose up
+docker compose up -d

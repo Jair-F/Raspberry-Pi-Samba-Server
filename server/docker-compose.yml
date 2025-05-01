@@ -7,6 +7,7 @@ services:
     volumes:
       - ${SERVER_DIR}/hompage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+      #- ${SERVER_DIR}:/media/server
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=* # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
 

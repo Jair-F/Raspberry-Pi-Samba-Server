@@ -1,6 +1,7 @@
 services:
   nextcloud:
     image: nextcloud
+    container_name: nextcloud
     restart: unless-stopped
     # network_mode: "host"
     ports:
@@ -10,12 +11,13 @@ services:
       - 443:443
       - 3478:3478
     volumes:
-      - /media/server/nextcloud:/var/www/html
+      - ${SERVER_DIR}/nextcloud:/var/www/html
     environment:
+      - ServerName=${PUBLIC_DOMAIN}:${PUBLIC_PORT}
       - SQLITE_DATABASE=nextcloud
       - NEXTCLOUD_ADMIN_USER=admin
       - NEXTCLOUD_ADMIN_PASSWORD=admin
-      - NEXTCLOUD_TRUSTED_DOMAINS=localhost 192.168.*.*
+      - NEXTCLOUD_TRUSTED_DOMAINS=localhost 192.168.*.* ${PUBLIC_DOMAIN}
 
   pihole:
     container_name: pihole
@@ -25,27 +27,27 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       # Default HTTP Port
-      - "80:80/tcp"
+      - "1080:80/tcp"
       # Default HTTPs Port. FTL will generate a self-signed certificate
-      - "443:443/tcp"
+      #- "443:443/tcp"
       # Uncomment the below if using Pi-hole as your DHCP Server
-      #- "67:67/udp"
+      - "67:67/udp"
       # Uncomment the line below if you are using Pi-hole as your NTP server
       #- "123:123/udp"
     environment:
       # Set the appropriate timezone for your location from
       # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones, e.g:
-      TZ: 'Europe/London'
+      TZ: 'Israel'
       # Set a password to access the web interface. Not setting one will result in a random password being assigned
-      FTLCONF_webserver_api_password: 'correct horse battery staple'
+      FTLCONF_webserver_api_password: 'pass'
       # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
-      FTLCONF_dns_listeningMode: 'all'
+      # FTLCONF_dns_listeningMode: 'all'
     # Volumes store your data between container upgrades
     volumes:
       # For persisting Pi-hole's databases and common configuration file
-      - './etc-pihole:/etc/pihole'
+      - '${SERVER_DIR}/pihole/etc/pihole:/etc/pihole'
       # Uncomment the below if you have custom dnsmasq config files that you want to persist. Not needed for most starting fresh with Pi-hole v6. If you're upgrading from v5 you and have used this directory before, you should keep it enabled for the first v6 container start to allow for a complete migration. It can be removed afterwards. Needs environment variable FTLCONF_misc_etc_dnsmasq_d: 'true'
-      #- './etc-dnsmasq.d:/etc/dnsmasq.d'
+      - '${SERVER_DIR}/pihole/etc/dnsmasq.d:/etc/dnsmasq.d'
     cap_add:
       # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
       # Required if you are using Pi-hole as your DHCP server, else not needed

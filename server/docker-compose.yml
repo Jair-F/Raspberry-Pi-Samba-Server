@@ -15,12 +15,12 @@ services:
     image: nextcloud
     container_name: nextcloud
     restart: unless-stopped
-    # network_mode: "host"
+    # network_mode: host
     ports:
       - ${PUBLIC_PORT}:80
       - 8080:8080
       - 8443:8443
-      - 443:443
+      #- 443:443
       - 3478:3478
     volumes:
       - ${SERVER_DIR}/nextcloud:/var/www/html
@@ -34,18 +34,19 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
-    ports:
-      # DNS Ports
-      - "53:53/tcp"
-      - "53:53/udp"
-      # Default HTTP Port
-      #- "1080:80/tcp"
-      # Default HTTPs Port. FTL will generate a self-signed certificate
-      - "1080:443/tcp"
-      # Uncomment the below if using Pi-hole as your DHCP Server
-      - "67:67/udp"
-      # Uncomment the line below if you are using Pi-hole as your NTP server
-      #- "123:123/udp"
+    network_mode: host
+    # ports:
+    #   # DNS Ports
+    #   - "53:53/tcp"
+    #   - "53:53/udp"
+    #   # Default HTTP Port
+    #   #- "1080:80/tcp"
+    #   # Default HTTPs Port. FTL will generate a self-signed certificate
+    #   - "1080:443/tcp"
+    #   # Uncomment the below if using Pi-hole as your DHCP Server
+    #   - "67:67/udp"
+    #   # Uncomment the line below if you are using Pi-hole as your NTP server
+    #   - "123:123/udp"
     environment:
       # Set the appropriate timezone for your location from
       # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones, e.g:

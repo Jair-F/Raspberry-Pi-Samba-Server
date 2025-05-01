@@ -8,7 +8,7 @@
         icon: https://nextcloud.com/c/uploads/2023/02/logo_nextcloud_white.svg
         description: Nextcloud File Server
     - PiHole:
-        href: https://jaja8373-24256.portmap.io:1080/admin/
+        href: https://pi.hole/admin/
         icon: https://wp-cdn.pi-hole.net/wp-content/uploads/2023/05/pihole-logo-horizontal-white-e1683321640117.png
         description: PiHole DNS Server
 

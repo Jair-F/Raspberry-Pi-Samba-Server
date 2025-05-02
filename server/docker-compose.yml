@@ -2,8 +2,10 @@ services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
-    ports:
-      - 80:3000
+    # ports:
+    #   - 3000:3000
+    networks:
+      - server_network
     volumes:
       - ${SERVER_DIR}/hompage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
@@ -16,12 +18,14 @@ services:
     container_name: nextcloud
     restart: unless-stopped
     # network_mode: host
-    ports:
-      #- ${PUBLIC_PORT}:80
-      - 8080:8080
-      - 8443:8443
-      #- 443:443
-      - 3478:3478
+    # ports:
+    # - 80:80
+    #- 8080:8080
+    #- 8443:8443
+    #- 443:443
+    #- 3478:3478
+    networks:
+      - server_network
     volumes:
       - ${SERVER_DIR}/nextcloud:/var/www/html
     environment:
@@ -29,29 +33,32 @@ services:
       - SQLITE_DATABASE=nextcloud
       - NEXTCLOUD_ADMIN_USER=admin
       - NEXTCLOUD_ADMIN_PASSWORD=admin
-      - NEXTCLOUD_TRUSTED_DOMAINS=localhost 192.168.*.* ${PUBLIC_DOMAIN}
+      - NEXTCLOUD_TRUSTED_DOMAINS=* ${PUBLIC_DOMAIN}
+
+  # https://www.reddit.com/r/pihole/comments/1241awx/im_struggling_to_get_a_pihole_docker_container/
 
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
-    #network_mode: host
+    # network_mode: host
     ports:
       # DNS Ports
-      - "53:53"
-      # Default HTTP Port
-      #- "80:80/tcp"
-      # Default HTTPs Port. FTL will generate a self-signed certificate
-      #- "1080:443/tcp"
-      # Uncomment the below if using Pi-hole as your DHCP Server
-      - "67:67/udp"
-      # Uncomment the line below if you are using Pi-hole as your NTP server
-      - "123:123/udp"
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp" # Uncomment the below if using Pi-hole as your DHCP Server
+      - "80:80/tcp" # default http port
+      - "443:443/tcp" # Default HTTPs Port. FTL will generate a self-signed certificate
+      - "123:123/udp" # Uncomment the line below if you are using Pi-hole as your NTP server
+    networks:
+      host_bridge:
+        ipv4_address: 192.168.0.253
     environment:
       # Set the appropriate timezone for your location from
       # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones, e.g:
       TZ: 'Israel'
       # Set a password to access the web interface. Not setting one will result in a random password being assigned
       FTLCONF_webserver_api_password: 'pass'
+      ServerIP: '192.168.0.253'
       # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
       # FTLCONF_dns_listeningMode: 'all'
       # Volumes store your data between container upgrades
@@ -70,17 +77,33 @@ services:
       - SYS_NICE
     restart: unless-stopped
 
-  services:
   nginxproxymanager:
     image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginxproxymanager
     restart: unless-stopped
     ports:
       - '80:80'
       - '81:81'
       - '443:443'
+    networks:
+      - server_network
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - ${SERVER_DIR}/nginxproxymanager/data:/data
+      - ${SERVER_DIR}/nginxproxymanager/letsencrypt:/etc/letsencrypt
     environment:
       INITIAL_ADMIN_EMAIL: admin@example.com
       INITIAL_ADMIN_PASSWORD: changeme
+
+networks:
+  server_network:
+    name: server_network
+  host_bridge:
+    name: host_bridge
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+          gateway: 192.168.0.1
+          ip_range: 192.168.0.21/24

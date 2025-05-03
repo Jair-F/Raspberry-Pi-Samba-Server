@@ -4,13 +4,17 @@
 
 - Home Links:
     - Nextcloud:
-        href: http://jaja8373-24256.portmap.io:24256/
+        href: http://jaja8373-24256.portmap.io:24256/login
         icon: https://nextcloud.com/c/uploads/2023/02/logo_nextcloud_white.svg
         description: Nextcloud File Server
     - PiHole:
-        href: https://pihole.local/admin/
+        href: https://pihole.local
         icon: https://wp-cdn.pi-hole.net/wp-content/uploads/2023/05/pihole-logo-horizontal-white-e1683321640117.png
         description: PiHole DNS Server - passwort=pass
+    - NginxProxyManager:
+        href: https://proxy.fehlauer.duckdns.org/
+        #icon: https://upload.wikimedia.org/wikipedia/commons/4/4f/PhpMyAdmin_logo.svg
+        #description: PHPMyAdmin Site
     - PHPMyAdmin:
         href: http://192.168.0.254:8080/
         icon: https://upload.wikimedia.org/wikipedia/commons/4/4f/PhpMyAdmin_logo.svg

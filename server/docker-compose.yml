@@ -1,11 +1,28 @@
 services:
+#   nginxproxymanager:
+#     image: 'jc21/nginx-proxy-manager:latest'
+#     container_name: nginxproxymanager
+#     restart: unless-stopped
+#     ports:
+#       - '80:80'
+#       - '81:81'
+#       - '443:443'
+#     networks:
+#       - server_network
+#     volumes:
+#       - ${SERVER_DIR}/nginxproxymanager/data:/data
+#       - ${SERVER_DIR}/nginxproxymanager/letsencrypt:/etc/letsencrypt
+#     environment:
+#       INITIAL_ADMIN_EMAIL: admin@example.com
+#       INITIAL_ADMIN_PASSWORD: changeme
+
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
-    # ports:
-    #   - 3000:3000
-    networks:
-      - server_network
+    ports:
+      - 80:3000
+    # networks:
+    #   - server_network
     volumes:
       - ${SERVER_DIR}/hompage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
@@ -18,14 +35,14 @@ services:
     container_name: nextcloud
     restart: unless-stopped
     # network_mode: host
-    # ports:
-    # - 80:80
-    #- 8080:8080
-    #- 8443:8443
-    #- 443:443
-    #- 3478:3478
-    networks:
-      - server_network
+    ports:
+      - 24256:80
+      - 8080:8080
+      - 8443:8443
+      #- 443:443
+      - 3478:3478
+    # networks:
+    #   - server_network
     volumes:
       - ${SERVER_DIR}/nextcloud:/var/www/html
     environment:
@@ -33,10 +50,9 @@ services:
       - SQLITE_DATABASE=nextcloud
       - NEXTCLOUD_ADMIN_USER=admin
       - NEXTCLOUD_ADMIN_PASSWORD=admin
-      - NEXTCLOUD_TRUSTED_DOMAINS=* ${PUBLIC_DOMAIN}
+      - NEXTCLOUD_TRUSTED_DOMAINS=*
 
   # https://www.reddit.com/r/pihole/comments/1241awx/im_struggling_to_get_a_pihole_docker_container/
-
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
@@ -46,10 +62,11 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       - "67:67/udp" # Uncomment the below if using Pi-hole as your DHCP Server
-      - "80:80/tcp" # default http port
+      #- "80:80/tcp" # default http port
       - "443:443/tcp" # Default HTTPs Port. FTL will generate a self-signed certificate
       - "123:123/udp" # Uncomment the line below if you are using Pi-hole as your NTP server
     networks:
+    #   server_network:
       host_bridge:
         ipv4_address: 192.168.0.253
     environment:
@@ -77,26 +94,10 @@ services:
       - SYS_NICE
     restart: unless-stopped
 
-  nginxproxymanager:
-    image: 'jc21/nginx-proxy-manager:latest'
-    container_name: nginxproxymanager
-    restart: unless-stopped
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
-    networks:
-      - server_network
-    volumes:
-      - ${SERVER_DIR}/nginxproxymanager/data:/data
-      - ${SERVER_DIR}/nginxproxymanager/letsencrypt:/etc/letsencrypt
-    environment:
-      INITIAL_ADMIN_EMAIL: admin@example.com
-      INITIAL_ADMIN_PASSWORD: changeme
 
 networks:
-  server_network:
-    name: server_network
+  # server_network:
+  #   name: server_network
   host_bridge:
     name: host_bridge
     driver: macvlan

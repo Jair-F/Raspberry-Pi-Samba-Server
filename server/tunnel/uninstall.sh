@@ -1,7 +1,7 @@
 #!/bin/bash
 
-systemctl stop sshtunnel
-systemctl disable sshtunnel
+systemctl stop sshtunnel.service
+systemctl disable sshtunnel.service
 
 rm /etc/systemd/system/sshtunnel.service
 rm /usr/bin/start_portmapio_tunnel

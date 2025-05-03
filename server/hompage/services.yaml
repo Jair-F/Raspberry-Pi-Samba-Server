@@ -11,8 +11,8 @@
         href: https://pihole.local
         icon: https://wp-cdn.pi-hole.net/wp-content/uploads/2023/05/pihole-logo-horizontal-white-e1683321640117.png
         description: PiHole DNS Server - passwort=pass
-    - NginxProxyManager:
-        href: https://proxy.fehlauer.duckdns.org/
+    #- NginxProxyManager:
+        #href: https://proxy.fehlauer.duckdns.org/
         #icon: https://upload.wikimedia.org/wikipedia/commons/4/4f/PhpMyAdmin_logo.svg
         #description: PHPMyAdmin Site
     - PHPMyAdmin:

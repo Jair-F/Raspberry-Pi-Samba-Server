@@ -5,8 +5,7 @@ After=network.target
 [Service]
 Restart=always
 RestartSec=20
-User=sshtunnel
-ExecStart=/usr/bin/start_portmapio_tunnel
+ExecStart=/bin/bash /usr/bin/start_portmapio_tunnel
 
 [Install]
 WantedBy=multi-user.target

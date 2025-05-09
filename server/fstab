@@ -5,10 +5,10 @@ PARTUUID=c4200f8b-02  /               ext4    defaults,noatime  0       1
 #   use  dphys-swapfile swap[on|off]  for that
 
 # Samba-Share Device
-UUID=9d4cf425-b20b-4965-8eac-669273665f3f       /media/Data/Samba_Share_Device  ext4    defaults,noatime        0       2
+UUID=9d4cf425-b20b-4965-8eac-669273665f3f       /media/Data/Samba_Share_Device  ext4    defaults,noatime,auto,nofail        0       2
 
 # Backup-Drive
-UUID=ed6ec847-28d9-4949-a331-2719631ba171       /media/Data/Samba_Share_Device/Samba_Share/Backups  ext4    defaults,noatime        0       2
+UUID=ed6ec847-28d9-4949-a331-2719631ba171       /media/Data/Samba_Share_Device/Samba_Share/Backups  ext4    defaults,noatime,auto,nofail        0       2
 
 # USB
 #/dev/sdc1	/media/Data/blocker	auto	noauto,soft,retry=0,timeo=3,x-systemd.automount,x-systemd.device-timeout=1ms,defaults	0	2

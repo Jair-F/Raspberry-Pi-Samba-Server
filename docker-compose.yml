@@ -11,4 +11,4 @@ services:
       #- "22:22"
     volumes:
       - ${PWD}/data/sambaUsers.back:/server_scripts/sambaUsers.back
-      - /media/Data/Samba_Share_Device:/media/Data/Samba_Share_Device
+      - /media/server/Samba_Share:/media/Data/Samba_Share_Device/Samba_Share

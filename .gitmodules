@@ -1,0 +1,4 @@
+[submodule "samba_pass"]
+	path = samba_pass
+	url = https://github.com/Jair-F/samba_pass.git
+	branch = master

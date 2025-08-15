@@ -8,6 +8,7 @@ services:
     ports:
       - "139:139"
       - "445:445"
+      #- "80:80"
       #- "22:22"
     volumes:
       - ${PWD}/data/sambaUsers.back:/server_scripts/sambaUsers.back

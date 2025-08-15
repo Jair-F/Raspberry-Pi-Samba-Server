@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM jairf/samba_pass:latest
 
 RUN apt update && apt upgrade -y
 

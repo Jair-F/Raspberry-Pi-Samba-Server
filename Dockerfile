@@ -21,4 +21,4 @@ COPY scripts/startServer.sh /server_scripts
 COPY scripts/addUsers.sh /server_scripts
 RUN chmod +x /server_scripts/startServer.sh /server_scripts/addUsers.sh
 
-CMD [ "/server_scripts/startServer.sh" ]
+ENTRYPOINT [ "/server_scripts/startServer.sh" ]

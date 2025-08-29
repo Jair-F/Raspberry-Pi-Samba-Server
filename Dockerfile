@@ -1,17 +1,13 @@
 FROM jairf/samba_pass:latest
+USER root
 
 RUN apt update && apt upgrade -y
+RUN apt install -y bash-completion curl wget vim samba sudo net-tools iproute2
 
-# dev container settings
-RUN apt install -y git bash-completion fish curl wget shellcheck
-
-RUN apt install -y vim openssh-server build-essential samba sudo net-tools iproute2
 COPY ./smb.conf /etc/samba/smb.conf
 RUN mkdir /samba_server
 
-USER root
 RUN cp -R /etc/skel/.* /root/ ; echo " "
-RUN usermod -s /bin/fish root
 
 COPY . /samba_server
 

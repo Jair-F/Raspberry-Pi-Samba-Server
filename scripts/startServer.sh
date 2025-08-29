@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -e "/samba_server/user_creds.back" ]; then
+if [ -e "/samba_server/data/user_creds.back" ]; then
     echo "samba config exists..."
 else
     echo "samba config doesnt exists - setting up default config"

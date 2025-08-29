@@ -1,8 +1,8 @@
 #!/bin/bash
 
-SCRIPT=$(realpath "$0")
-SCRIPT_PATH=$(dirname "$SCRIPT")
-echo "$SCRIPT_PATH"
+DATA_PATH="/samba_server/data"
+echo "$DATA_PATH"
+ls "$DATA_PATH"
 
 # delete password for user
 # passwd -d user
@@ -17,7 +17,7 @@ then
 	exit 1
 fi
 
-if [ ! -f "$SCRIPT_PATH/sambaUsers.back" ]
+if [ ! -f "$DATA_PATH/user_creds.bak" ]
 then
 	echo "samba users Backup File doesnt exists - not creating users"
 	exit 0
@@ -27,8 +27,8 @@ echo "adding login user jair"
 useradd -m -p "\$6\$rvUVdxrCv5S/Zknq\$RQLd9FA.H/iq4gMVUIQANgPp93jOO9itv7gAecODzL/C9c5xodhhYMsITpfTCZvAlFraK94TAwmAyAXYwKjmh/" \
  	-s /bin/bash -U -G sudo jair
 
-#for username in $(awk -F: '{print $1}' < "$SCRIPT_PATH/sambaUsers.back")
-awk -F: '{print $1}' < "$SCRIPT_PATH/sambaUsers.back" | while read -r username
+#for username in $(awk -F: '{print $1}' < "$DATA_PATH/user_creds.bak")
+awk -F: '{print $1}' < "$DATA_PATH/user_creds.bak" | while read -r username
 do
 	echo "username: $username"
 	if [ "$username" == "jair" ] ; # we add him extra later
@@ -42,7 +42,7 @@ do
 done
 
 # restoring samba users
-pdbedit -i "smbpasswd:$SCRIPT_PATH/sambaUsers.back"
+pdbedit -i "smbpasswd:$DATA_PATH/user_creds.bak"
 
 echo ""
 echo "list of samba users:"

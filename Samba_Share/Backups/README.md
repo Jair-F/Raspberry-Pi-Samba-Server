@@ -1,1 +1,0 @@
-The folder where the backup-Drive is mounted

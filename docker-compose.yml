@@ -10,4 +10,4 @@ services:
       - "445:445"
       - "80:80"
     volumes:
-      - ./data:/samba_server/data
+      - /media/server/Samba_Share:/samba_server/data

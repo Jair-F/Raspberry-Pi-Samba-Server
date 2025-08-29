@@ -17,4 +17,5 @@ COPY . /samba_server
 
 RUN chmod +x /samba_server/scripts/*.sh
 
+ENV SAMBA_PASS_USER_CREDS_FILE=/samba_server/data/user_creds.bak
 ENTRYPOINT [ "/samba_server/scripts/startServer.sh" ]

@@ -11,5 +11,5 @@ services:
       #- "80:80"
       #- "22:22"
     volumes:
-      - ${PWD}/data/sambaUsers.back:/server_scripts/sambaUsers.back
-      - /media/server/Samba_Share:/media/Data/Samba_Share_Device/Samba_Share
+      #- ${PWD}/data/user_creds.bak:/server_scripts/user_creds.bak
+      - /media/server/Samba_Share:/samba_server/data

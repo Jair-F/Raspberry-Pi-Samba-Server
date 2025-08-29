@@ -7,18 +7,14 @@ RUN apt install -y git bash-completion fish curl wget shellcheck
 
 RUN apt install -y vim openssh-server build-essential samba sudo net-tools iproute2
 COPY ./smb.conf /etc/samba/smb.conf
-RUN mkdir -p /media/Data/Samba_Share_Device
-RUN mkdir /server_scripts
-
+RUN mkdir /samba_server
 
 USER root
 RUN cp -R /etc/skel/.* /root/ ; echo " "
 RUN usermod -s /bin/fish root
 
-WORKDIR /server_scripts
+COPY . /samba_server
 
-COPY scripts/startServer.sh /server_scripts
-COPY scripts/addUsers.sh /server_scripts
-RUN chmod +x /server_scripts/startServer.sh /server_scripts/addUsers.sh
+RUN chmod +x /samba_server/scripts/*.sh
 
-ENTRYPOINT [ "/server_scripts/startServer.sh" ]
+ENTRYPOINT [ "/samba_server/scripts/startServer.sh" ]

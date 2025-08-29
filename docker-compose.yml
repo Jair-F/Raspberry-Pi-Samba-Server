@@ -1,7 +1,7 @@
 services:
   samba_server:
     # build: .
-    image: jairf/samba_server:1.1.0
+    image: jairf/samba_server:2.0.1
     tty: true # make container run in background
     restart: unless-stopped
     # network_mode: "host"
